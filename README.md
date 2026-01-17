@@ -1,46 +1,92 @@
-# Getting Started with Create React App
+# Habit Tracker PWA
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Progressive Web App for tracking daily habits with Firebase backend, built with React, TypeScript, Ant Design, and Chart.js.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- ✅ Create, read, update, and delete habits
+- 📅 Set how many days per week to complete each habit
+- ⏰ Optional time reminders for habits
+- ✔️ Check-in functionality to mark habits as complete
+- 📊 Statistics dashboard with completion rates and trends
+- 🔔 Push notifications for habit reminders (PWA)
+- 📱 Mobile-friendly responsive design
+- 🎨 Beautiful UI with Ant Design and styled-components
 
-### `npm start`
+## Setup Instructions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 1. Firebase Setup
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project (or use existing one)
+3. Enable Firestore Database:
+   - Go to Firestore Database
+   - Click "Create database"
+   - Choose "Start in test mode" (for development)
+4. Enable Firebase Cloud Messaging:
+   - Go to Project Settings > Cloud Messaging
+   - Generate a new Web Push certificate (VAPID key)
+5. Get your Firebase configuration:
+   - Go to Project Settings > General
+   - Scroll to "Your apps" section
+   - Click the web icon (</>) to add a web app
+   - Copy the configuration values
 
-### `npm test`
+### 2. Environment Variables
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Copy the values from Firebase to `.env` file
+2. Update the following variables in `.env`
+3. Also update the Firebase config in `public/firebase-messaging-sw.js` with the same values
 
-### `npm run build`
+### 3. Run Development Server
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The app will open at [http://localhost:3000](http://localhost:3000)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 4. Enable Notifications
 
-### `npm run eject`
+1. Click "Enable Notifications" button in the app header
+2. Allow notifications when prompted by your browser
+3. The app will request permission and set up push notifications
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 5. Build for Production
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Project Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+src/
+├── components/
+│   ├── HabitCard.tsx          # Individual habit card with check-in
+│   ├── HabitFormModal.tsx     # Form to create/edit habits
+│   ├── HabitList.tsx          # List of all habits
+│   └── Statistics.tsx         # Stats dashboard with charts
+├── firebase/
+│   └── config.ts              # Firebase initialization
+├── services/
+│   ├── habitService.ts        # CRUD operations for habits
+│   └── notificationService.ts # Push notification handlers
+├── types/
+│   └── Habit.ts               # TypeScript interfaces
+├── App.tsx                     # Main app component with routing
+└── index.tsx                   # App entry point
+```
 
-## Learn More
+## Technologies Used
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- React with TypeScript
+- Firebase (Firestore, Cloud Messaging)
+- Ant Design for UI components
+- styled-components for custom styling
+- Chart.js with react-chartjs-2 for data visualization
+- dayjs for date handling
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## License
+
+MIT
